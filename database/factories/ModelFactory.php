@@ -24,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => $faker->randomNumber(),
+        'user_id' => $faker->numberBetween($min = 1, $max = 50),
         'title' => $faker->word,
         'body' => $faker->word,
         'catagory' => $faker->word,
@@ -33,10 +33,9 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Review::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => $faker->randomNumber(),
-        'post_id' => $faker->randomNumber(),
+        'user_id' => $faker->numberBetween($min = 1, $max = 50),
+        'post_id' => $faker->numberBetween($min = 1, $max = 50),
         'star' => $faker->randomNumber(),
         'review' => $faker->word,
     ];
 });
-

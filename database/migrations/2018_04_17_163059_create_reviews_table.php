@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('post_id');
-              $table->foregin('post_id')->reference('id')->on(posts);
+
 
             $table->integer('star');
 

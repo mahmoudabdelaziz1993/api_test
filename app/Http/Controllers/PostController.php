@@ -15,6 +15,21 @@ class PostController extends Controller
     public function index()
     {
         //
+        $posts =Post::all();
+        foreach ($posts as $post) {
+          # code...
+        $var[]= [
+             'id'=> $post->id ,
+             'title'=> $post->title ,
+             'body'=> $post->body ,
+             'link'=> route('post.show',$post->id),
+              ] ;
+
+
+        }
+        return $var;
+
+
     }
 
     /**
@@ -36,6 +51,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -44,9 +60,29 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show( $post)
     {
         //
+        $postv = Post::where('id',$post)->get();
+      //  foreach ($postv as $posts) {
+          // code...
+
+        //  $avr[]= [
+        // //  'id'=>$post,
+        //   'title'=>$posts->title,
+        //   'body'=>$posts->body,
+        //   'category'=>$posts->category,
+        //   'user'=>$posts->user_id,
+        //   //'review'=>Post::find($post->id)->review->count()>0? route("review.index",$post->id):'no reviews on this post',
+        //
+        // ];}
+       $postv->toArray();
+       // $var[]=[
+       //   'review'=>Post::find($post)->review->count()>0? route("review.index",$post):'no reviews on this post',
+       // ];
+       // $posta = $postv->merge($var);
+         return $postv->add(['review'=>Post::find($post)->review->count()>0? route("review.index",$post):'no reviews on this post',]);
+        //return $var;
     }
 
     /**
